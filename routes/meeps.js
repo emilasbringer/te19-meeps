@@ -74,11 +74,15 @@ router.get('/:id/delete', async (req, res, next) => {
 
 router.post('/:id/update', async (req, res, next) => {
     const id = req.params.id;
-    const content = req.params.body;
+    const content = req.body.body;
 
+    res.json({id,content});
+    console.log(req.body.body);
+
+    /*
     await pool
     .promise()
-    .query('UPDATE meeps SET body = "?" WHERE id = ?', [content,id])
+    .query('UPDATE meeps SET body = "?" WHERE id = ?',[content,id])
     .then(response => {
         res.redirect('/meeps');
     })
@@ -90,6 +94,7 @@ router.post('/:id/update', async (req, res, next) => {
             },
         });
     });
+    */
 });
 
 module.exports = router;
