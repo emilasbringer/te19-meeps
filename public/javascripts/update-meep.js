@@ -6,7 +6,9 @@ updateForm.style.display = "none";
 
 
 for (let i = 0; i < updateButton.length; i++) {
-    updateButton[i].addEventListener("click", displayUpdateField);
+    updateButton[i].addEventListener("click", (e)=>{
+        console.log(e);
+    });
 }
 
 function displayUpdateField () {
