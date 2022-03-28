@@ -21,3 +21,14 @@ a {
 .custom-bg-blue {
   background: #0093df;
 }
+
+.meep-nav {
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  top: 0;
+}
+
+.mt-5r {
+  margin-top: 5rem;
+}

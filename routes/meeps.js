@@ -1,5 +1,4 @@
 const express = require('express');
-const { response } = require('../app');
 const router = express.Router();
 const pool = require('../database');
 /* 
@@ -16,16 +15,15 @@ router.get('/', async (req, res, next) => {
         .then(([rows, fields]) => {
               res.render('meeps.njk', {
                 meeps: rows,
-                title: 'Tasks',
-                layout: 'layout.njk',
-                flash: 'Deleted'
+                title: 'Meeps',
+                layout: 'layout.njk'
               });
         })
         .catch(err => {
             console.log(err);
             res.status(500).json({
                 tasks: {
-                    error: 'Error getting tasks'
+                    error: 'Error getting meeps'
                 }
             })
         });
@@ -54,24 +52,44 @@ router.get('/:id/delete', async (req, res, next) => {
     const id = req.params.id;
     await pool
         .promise()
-        .query('DELETE FROM tasks WHERE id = ?', [id])
+        .query('DELETE FROM meeps WHERE id = ?', [id])
         .then((response) => {
             if (response[0].affectedRows === 1) {
-                req.session.flash = 'Task deleted';
-                res.redirect('/tasks');
+                return res.redirect('/meeps');
             } else {
-                req.session.flash = 'Task not found';
-                res.status(400).redirect('/tasks');
+                req.session.flash = 'Meep not found';
+                return res.status(400).redirect('/meeps');
             }
         })
         .catch((err) => {
             console.log(err);
             res.status(500).json({
-                task: {
-                    error: 'Error getting tasks',
+                meep: {
+                    error: 'Error getting meeps',
                 },
             });
         });
+});
+
+
+router.post('/:id/update', async (req, res, next) => {
+    const id = req.params.id;
+    const content = req.params.body;
+
+    await pool
+    .promise()
+    .query('UPDATE meeps SET body = "?" WHERE id = ?', [content,id])
+    .then(response => {
+        res.redirect('/meeps');
+    })
+    .catch(error => {
+        console.log(error);
+        res.status(500).json({
+            meep: {
+                error: 'Error getting meeps',
+            },
+        });
+    });
 });
 
 module.exports = router;
