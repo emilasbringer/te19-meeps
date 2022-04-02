@@ -16,7 +16,7 @@ router.get('/', async (req, res, next) => {
         .then(([rows, fields]) => {
               res.render('meeps.njk', {
                 meeps: rows,
-                title: 'Meeps',
+                title: 'Meeper',
                 layout: 'layout.njk'
               });
         })

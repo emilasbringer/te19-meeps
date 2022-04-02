@@ -6,6 +6,9 @@ const logger = require('morgan');
 const nunjucks = require('nunjucks');
 const indexRouter = require('./routes/index');
 const meepRouter = require('./routes/meeps');
+const editRouter = require('./routes/edit');
+const loginRouter = require('./routes/login');
+const signupRouter = require('./routes/signup');
 
 var app = express();
 
@@ -25,5 +28,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/meeps', meepRouter);
+app.use('/edit', editRouter);
+app.use('/login', loginRouter);
+app.use('/signup', signupRouter);
 
 module.exports = app;
