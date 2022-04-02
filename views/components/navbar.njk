@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark custom-bg-blue meep-nav">
     <div class="container ">
         <a class="navbar-brand" href="/">Meeper</a>
+        <img src="/images/meep.jpg" class="tiny-brand">
         <button
             class="navbar-toggler"
             type="button"
@@ -20,10 +21,25 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/meeps">Meeps</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
-                </li>
             </ul>
+                <div class="nav-item">
+                    
+                </div>
+                {% if token %}
+                <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ token }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/profile">View Profile</a>
+                    <a class="dropdown-item" href="#">Settings</a>
+                    <form action="/login/logout" method="post">
+                    <button type="submit" class="dropdown-item">Sign out</button>
+                    </form>
+                </div>
+                {% else %}
+                <a class="btn btn-secondary" href="/login">Login</a>
+                {% endif %}
         </div>
     </div>
 </nav>

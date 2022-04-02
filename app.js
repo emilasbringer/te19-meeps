@@ -4,11 +4,13 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const nunjucks = require('nunjucks');
+const session = require('express-session');
 const indexRouter = require('./routes/index');
 const meepRouter = require('./routes/meeps');
 const editRouter = require('./routes/edit');
 const loginRouter = require('./routes/login');
 const signupRouter = require('./routes/signup');
+var profileRouter = require('./routes/profile');
 
 var app = express();
 
@@ -26,10 +28,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: 'kirbycarkirbycar',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { sameSite: true }
+}));
+
 app.use('/', indexRouter);
 app.use('/meeps', meepRouter);
 app.use('/edit', editRouter);
 app.use('/login', loginRouter);
 app.use('/signup', signupRouter);
+app.use('/profile', profileRouter);
 
 module.exports = app;

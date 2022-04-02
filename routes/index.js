@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index.njk', {layout: "layout.njk", title: 'Meeper' });
+  res.render('index.njk', {layout: "layout.njk", title: 'Meeper', token: req.session.loginToken });
 });
 
 module.exports = router;

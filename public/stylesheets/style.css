@@ -37,6 +37,40 @@ a {
   height: 10rem;
 }
 
+.h-100vh {
+  height: 100vh;
+}
+
 .fat-font {
   font-size: 4rem;
+}
+
+.of-f {
+  object-fit: scale-down;
+}
+
+.tiny-brand {
+  width: 2rem;
+  height: 2rem;
+}
+
+.landing-top {
+  width: 100%;
+  height: 95vh;
+  background: rgba(122, 122, 122, 0.251);
+}
+
+.landing-bottom {
+  width: 100%;
+  height: 5vh;
+}
+
+.landing-left {
+  width: 50%;
+  height: 100vh;
+}
+
+.landing-right {
+  width: 50%;
+  height: 100vh;
 }

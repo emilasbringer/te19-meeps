@@ -17,7 +17,8 @@ router.get('/', async (req, res, next) => {
               res.render('meeps.njk', {
                 meeps: rows,
                 title: 'Meeper',
-                layout: 'layout.njk'
+                layout: 'layout.njk',
+                token: req.session.loginToken
               });
         })
         .catch(err => {
