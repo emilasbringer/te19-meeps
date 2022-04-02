@@ -9,6 +9,7 @@ const pool = require('../database');
     PUT /:id - Update a task by id
     DELETE /:id - Delete a task by id
 */
+
 router.get('/', async (req, res, next) => {
     await pool.promise()
         .query('SELECT * FROM meeps ORDER BY id DESC')
