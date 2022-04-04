@@ -1,7 +1,6 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const pool = require('../database');
-
 const bcrypt = require('bcrypt');
 
 
@@ -33,13 +32,16 @@ router.post('/', async (req, res, next) => {
     const username = req.body.username;
     
     if (username.length > 0 && req.body.password.length > 0) {
+      console.log(username,req.body.password)
         await pool.promise()
             .query('SELECT * FROM users WHERE name = ?', [username])
             .then(([rows, fields]) => {
-                console.log(rows);
+                console.log("ROWS output = " + rows);
                 bcrypt.compare(req.body.password, rows[0].password, function(err,result) {
                     if (result) {
                         req.session.loginToken = username;
+                        console.log("Setting session_userid = " + rows[0].id);
+                        req.session.userid = rows[0].id;
                         res.redirect("/profile", );
                     } 
                     else {
@@ -49,7 +51,7 @@ router.post('/', async (req, res, next) => {
                 });
             })
             .catch(err => {
-                console.log(err);
+              console.log("Error occured:")
                 res.status(500).json({
                     users: {
                         error: "Error getting users"

@@ -12,7 +12,7 @@ const pool = require('../database');
 
 router.get('/', async (req, res, next) => {
     await pool.promise()
-        .query('SELECT * FROM meeps ORDER BY id DESC')
+        .query('SELECT * FROM meeps JOIN users WHERE user_id = users.id ORDER BY created_at DESC')
         .then(([rows, fields]) => {
               res.render('meeps.njk', {
                 meeps: rows,
@@ -33,9 +33,11 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     const meep = req.body.meep;
-    console.log("MEEP = "+meep);
+    const userid = req.session.userid;
+    console.log("MEEP = " + meep);
+    console.log("USER ID = " + userid);
     await pool.promise()
-    .query('INSERT INTO meeps (body) VALUES (?)', [meep])
+    .query('INSERT INTO meeps (body,user_id) VALUES (?,?)', [meep,userid])
     .then((response) => {
         console.log(response);
         res.redirect("/meeps");
