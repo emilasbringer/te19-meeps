@@ -1,7 +1,6 @@
 {% extends layout %}
 {% block  content %}
 <main class="container">
-    {% include 'components/taskform.njk' %}
     {% include 'components/updateform.njk' %}
      <div>
         <ul class="list-group">
@@ -11,7 +10,7 @@
                     <div class="custom-text-body">
                         {{meep.body}}
                     </div>
-                    {% if meep.name == token %}
+
                     <div class="d-flex">
                         <a
                             href="/meeps/{{meep.id}}/delete"
@@ -30,8 +29,6 @@
                             </svg>
                         </a>
                     </div>
-                    {%else%}
-                    {%endif%}
                 </div>
                 <div class="meep-bottom">
                     Author: {{ meep.name }}

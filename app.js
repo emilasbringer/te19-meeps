@@ -10,7 +10,8 @@ const meepRouter = require('./routes/meeps');
 const editRouter = require('./routes/edit');
 const loginRouter = require('./routes/login');
 const signupRouter = require('./routes/signup');
-var profileRouter = require('./routes/profile');
+const profileRouter = require('./routes/profile');
+const usermeepRouter = require('./routes/usermeeps');
 
 var app = express();
 
@@ -41,5 +42,6 @@ app.use('/edit', editRouter);
 app.use('/login', loginRouter);
 app.use('/signup', signupRouter);
 app.use('/profile', profileRouter);
+app.use('/usermeeps', usermeepRouter);
 
 module.exports = app;
