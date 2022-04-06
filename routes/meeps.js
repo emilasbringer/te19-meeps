@@ -12,7 +12,7 @@ const pool = require('../database');
 
 router.get('/', async (req, res, next) => {
     await pool.promise()
-        .query('SELECT * FROM emlasb_meeps JOIN users WHERE user_id = users.id ORDER BY created_at DESC')
+        .query('SELECT * FROM emlasr_meeps JOIN users WHERE user_id = users.id ORDER BY created_at DESC')
         .then(([rows, fields]) => {
               res.render('meeps.njk', {
                 meeps: rows,
@@ -37,7 +37,7 @@ router.post('/', async (req, res, next) => {
     console.log("MEEP = " + meep);
     console.log("USER ID = " + userid);
     await pool.promise()
-    .query('INSERT INTO emlasb_meeps (body,user_id) VALUES (?,?)', [meep,userid])
+    .query('INSERT INTO emlasr_meeps (body,user_id) VALUES (?,?)', [meep,userid])
     .then((response) => {
         console.log(response);
         res.redirect("/meeps");
@@ -56,7 +56,7 @@ router.get('/:id/delete', async (req, res, next) => {
     const id = req.params.id;
     await pool
         .promise()
-        .query('DELETE FROM emlasb_meeps WHERE id = ?', [id])
+        .query('DELETE FROM emlasr_meeps WHERE id = ?', [id])
         .then((response) => {
             if (response[0].affectedRows === 1) {
                 return res.redirect('/meeps');

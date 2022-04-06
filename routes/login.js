@@ -11,7 +11,7 @@ router.get('/', async (req, res, next) => {
       return res.redirect("/profile");
     }
     await pool.promise()
-        .query('SELECT * FROM users')
+        .query('SELECT * FROM emlasr_users')
         .then(([rows, fields]) => {
             res.render('login.njk', { title: 'Meeper', error: req.session.error, flash: req.session.flash, token: req.session.loginToken});
             req.session.error = null;
@@ -34,7 +34,7 @@ router.post('/', async (req, res, next) => {
     if (username.length > 0 && req.body.password.length > 0) {
       console.log(username,req.body.password)
         await pool.promise()
-            .query('SELECT * FROM emlasb_users WHERE name = ?', [username])
+            .query('SELECT * FROM emlasr_users WHERE name = ?', [username])
             .then(([rows, fields]) => {
                 console.log("ROWS output = " + rows);
                 bcrypt.compare(req.body.password, rows[0].password, function(err,result) {
