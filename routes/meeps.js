@@ -12,7 +12,7 @@ const pool = require('../database');
 
 router.get('/', async (req, res, next) => {
     await pool.promise()
-        .query('SELECT * FROM emlasr_meeps JOIN users WHERE user_id = emlasr_users.id ORDER BY created_at DESC')
+        .query('SELECT * FROM emlasr_meeps JOIN emlasr_users WHERE user_id = emlasr_users.id ORDER BY created_at DESC')
         .then(([rows, fields]) => {
               res.render('meeps.njk', {
                 meeps: rows,
