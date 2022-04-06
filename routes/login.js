@@ -34,7 +34,7 @@ router.post('/', async (req, res, next) => {
     if (username.length > 0 && req.body.password.length > 0) {
       console.log(username,req.body.password)
         await pool.promise()
-            .query('SELECT * FROM users WHERE name = ?', [username])
+            .query('SELECT * FROM emlasb_users WHERE name = ?', [username])
             .then(([rows, fields]) => {
                 console.log("ROWS output = " + rows);
                 bcrypt.compare(req.body.password, rows[0].password, function(err,result) {
