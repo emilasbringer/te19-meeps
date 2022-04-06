@@ -1,3 +1,4 @@
+require('dotenv').config();
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -12,6 +13,7 @@ const loginRouter = require('./routes/login');
 const signupRouter = require('./routes/signup');
 const profileRouter = require('./routes/profile');
 const usermeepRouter = require('./routes/usermeeps');
+
 
 var app = express();
 
