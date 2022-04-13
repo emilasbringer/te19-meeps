@@ -13,6 +13,7 @@ const loginRouter = require('./routes/login');
 const signupRouter = require('./routes/signup');
 const profileRouter = require('./routes/profile');
 const usermeepRouter = require('./routes/usermeeps');
+const apiRouter = require('./routes/api');
 
 
 var app = express();
@@ -45,5 +46,6 @@ app.use('/login', loginRouter);
 app.use('/signup', signupRouter);
 app.use('/profile', profileRouter);
 app.use('/usermeeps', usermeepRouter);
+app.use('/api', apiRouter);
 
 module.exports = app;
